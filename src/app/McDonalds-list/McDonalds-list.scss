@@ -1,0 +1,40 @@
+// tr.oferta td{
+//     // background: rgba(121, 215, 111, 0.877);
+//     // background: rgb(241, 220, 61);
+//     background: rgb(252, 231, 69);
+//     border: 2px solid green;
+// }
+// tr.oferta{
+//      //border-left: 20px solid green;
+// }
+// table {
+//   border-collapse: separate;
+//   border-spacing: 0;
+// }
+
+tr.oferta td {
+    // background: rgba(121, 215, 111, 0.877);
+    // background: rgb(241, 220, 61);
+  background: rgb(252, 231, 69);
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+tr.oferta td:first-child { //td:first-child = selecciona el primer <td> hijo dentro de su padre
+  border-left: 2px solid black;
+}
+
+tr.oferta td:last-child {
+  border-right: 2px solid green;
+}
+
+.boton-compra{
+  padding: 2px 7px; 
+  font-size: 15px
+}
+
+.compra-producto{
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 4px;
+}

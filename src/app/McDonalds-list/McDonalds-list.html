@@ -1,0 +1,39 @@
+
+<table class="table text-center align-middle" style="height: 100px">
+  <thead class="table-dark">
+    <tr>
+        <th scope="col" aria-label="Imagen"></th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Precio</th>
+        <th>Unidades</th>
+        <th>Stock</th>
+        <th scope="col" aria-label="Producto en oferta"></th>
+        <th>Compra</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr *ngFor="let producto of productos" [ngClass] = "{'oferta': producto.oferta}">
+        <td class="td-ajustada p-0 align-middle"> <img [src]="producto.img" style="width: 120px; height: auto" [alt]="producto.nombre"></td>
+        <td>{{producto.nombre}}</td>
+        <td>{{producto.tipo}}</td>
+        <td>{{producto.precio | currency}}</td>
+        <td>{{producto.unidades}}</td>
+        <td> <span *ngIf = "producto.stock!==0; else sinStock">{{producto.stock}}</span></td>
+            <ng-template #sinStock> <span class="badge text-bg-danger fs-6">Sin Stock</span> </ng-template>
+        <td> <span *ngIf = "producto.oferta" class="badge text-bg-success fs-6">En oferta</span> </td>
+        <td>
+          <div class="d-flex align-items-center compra-producto">
+            <button class="btn btn-secondary boton-compra me-2"> - </button> 
+            {{producto.cantidad}} 
+            <button class="btn btn-secondary boton-compra ms-2"> + </button>
+          </div> 
+        </td>
+          
+      </tr>
+
+  </tbody>
+</table>
+
+
