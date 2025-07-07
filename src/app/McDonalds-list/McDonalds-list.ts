@@ -97,6 +97,43 @@ export class McDonaldsList {
 
   constructor() {}
 
+  increaseCantidad(producto: Producto):void{
+    if(producto.cantidad < producto.stock)
+      producto.cantidad++;
+  }
+
+  decreaseCantidad(producto: Producto):void{
+    if(producto.cantidad > 0)
+      producto.cantidad--;
+  }
+
+  validarCantidad(event: any, producto: Producto): void {
+    const input = event.target;
+    let valor = input.value;
+
+    valor = valor.replace(/\D/g, ''); // Quitá todos los caracteres que no sean números de la variable valor
+                        // \D → cualquier carácter que no sea un número
+                        // g → indica que debe hacerlo de forma global, es decir, en todas las apariciones
+
+    let cantidad = parseInt(valor, 10); // Convertir a número
+
+    if (isNaN(cantidad)) { // Si no es un número válido, lo seteo a cero
+      producto.cantidad = 0;
+      return;
+    }
+
+    if (cantidad > producto.stock) { // Si supera el stock disponible le permito comprar hasta ese valor nomas
+      cantidad = producto.stock;
+    }
+
+    producto.cantidad = cantidad; // Actualizo el modelo 
+    input.value = cantidad; // Actualizo el input visual
+  }
+
+
+  
 }
+
+
 
 

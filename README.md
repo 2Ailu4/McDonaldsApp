@@ -1,6 +1,37 @@
-# Brewery
+# <p align="center"> <u>TPE Seminario Angular</u> </p>
+## <p align="center"> **McDonalds App** </p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.4.
+<p align="center">
+  <img align="center" src="assets/img/presentacion2.gif">
+</p>
+
+## 📋 **Desarrollador**
+  * [Ailen Peralta Amado][websiteA]
+
+## 🔎 **Informacion Personal**
+  * *DNI:* 43512851
+  * *Email:* [ailen_peralta_24@outlook.com](ailen_peralta_24@outlook.com)
+  * *Sede:* Tandil
+
+## 📖 **Descripción**
+*No sabes que comer❓*
+*No tienes ganas de cocinar❓*
+**McDonalds-App es tu pagina ideal**❗
+Donde puedes realizar tu pedido de forma rapida y sencilla.⏳
+Selecciona la hamburguesa que deseas consumir, agrega una bebida, un acompañamientos y un postre.😋
+Solo debes: 
+  * Agregar estos productos a tu carrito. 🛒
+  * Indica si quieres recibirlo en tu hogar o retirarlo en la sucursar mas cercana. 🚀
+  * Realiza el pedido. 👩‍💻
+<p align="center"> **Y Listo, disfruta tu comida favorita**✅ </p>
+
+<p align="center">
+  <img align="center" src="assets/img/productos.gif">
+</p>
+
+
+
+<!-- This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.4.
 
 ## Development server
 
@@ -56,4 +87,4 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page. -->

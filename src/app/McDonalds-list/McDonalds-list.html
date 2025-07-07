@@ -1,5 +1,5 @@
 
-<table class="table text-center align-middle" style="height: 100px">
+<table class="table text-center align-middle tabla-producto">
   <thead class="table-dark">
     <tr>
         <th scope="col" aria-label="Imagen"></th>
@@ -15,22 +15,25 @@
   <tbody>
 
     <tr *ngFor="let producto of productos" [ngClass] = "{'oferta': producto.oferta}">
-        <td class="td-ajustada p-0 align-middle"> <img [src]="producto.img" style="width: 120px; height: auto" [alt]="producto.nombre"></td>
+        <td class="td-ajustada p-0"> <img class="img-producto" [src]="producto.img" [alt]="producto.nombre"></td>
         <td>{{producto.nombre}}</td>
         <td>{{producto.tipo}}</td>
         <td>{{producto.precio | currency}}</td>
         <td>{{producto.unidades}}</td>
         <td> <span *ngIf = "producto.stock!==0; else sinStock">{{producto.stock}}</span></td>
-            <ng-template #sinStock> <span class="badge text-bg-danger fs-6">Sin Stock</span> </ng-template>
+            <!--else--><ng-template #sinStock> <span class="badge text-bg-danger fs-6">Sin Stock</span> </ng-template> 
         <td> <span *ngIf = "producto.oferta" class="badge text-bg-success fs-6">En oferta</span> </td>
-        <td>
+        <td> <!-- Cantidad a comprar -->
           <div class="d-flex align-items-center compra-producto">
-            <button class="btn btn-secondary boton-compra me-2"> - </button> 
-            {{producto.cantidad}} 
-            <button class="btn btn-secondary boton-compra ms-2"> + </button>
+            <button class="btn btn-secondary boton-compra me-2" (click)="decreaseCantidad(producto)"> - </button> 
+            <input class = "input-cantidad" type = "text" 
+              [(ngModel)] = "producto.cantidad"
+              (input) = "validarCantidad($event, producto)">  <!--[()] es para decir que estamos conectados de ida y vuelta con producto.cantidad 
+                                                              (keyup) o (input) son eventos-->
+            <button class="btn btn-secondary boton-compra ms-2" (click)="increaseCantidad(producto)"> + </button>
           </div> 
         </td>
-          
+        
       </tr>
 
   </tbody>
