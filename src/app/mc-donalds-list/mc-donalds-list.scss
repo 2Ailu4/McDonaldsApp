@@ -1,10 +1,8 @@
 .img-producto{
-  width: 120px; 
-  height: auto;
-}
-
-.tabla-producto{
-  height: 100px;
+  width: 100px; 
+  height: 100px; 
+  object-fit: contain;
+  // background-color: white;
 }
 
 tr.oferta td {
@@ -18,7 +16,7 @@ tr.oferta td:first-child { //td:first-child = selecciona el primer <td> hijo den
 }
 
 tr.oferta td:last-child {
-  border-right: 2px solid green;
+  border-right: 2px solid black;
 }
 
 .boton-compra{
@@ -35,3 +33,10 @@ tr.oferta td:last-child {
 .input-cantidad{
   width: 35px;
 }
+
+.centrado{
+  text-align: center;
+}
+
+
+

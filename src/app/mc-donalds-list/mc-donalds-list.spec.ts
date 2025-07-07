@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { McDonaldsList } from './McDonalds-list';
+import { McDonaldsList } from './mc-donalds-list';
 
 describe('McDonaldsList', () => {
   let component: McDonaldsList;

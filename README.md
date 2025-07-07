@@ -18,10 +18,10 @@
 *No tienes ganas de cocinar❓* <br>
 **McDonalds-App es tu pagina ideal**❗<br>
 Donde puedes realizar tu pedido de forma rapida y sencilla.⏳ <br>
-Selecciona la hamburguesa que deseas consumir, agrega una bebida, un acompañamientos y un postre.😋 <br>
+Selecciona la hamburguesa que deseas consumir, agrega una bebida, un acompañamiento y un postre.😋 <br>
 Solo debes: 
   * Agregar estos productos a tu carrito. 🛒
-  * Indica si quieres recibirlo en tu hogar o retirarlo en la sucursar mas cercana. 🚀
+  * Indica si queres recibirlo en tu hogar o retirarlo en la sucursar mas cercana. 🚀
   * Realiza el pedido. 👩‍💻
 <p align="center">
   <img width="150" align="center" src="src/assets/gif/productos.gif">

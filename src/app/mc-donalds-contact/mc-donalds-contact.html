@@ -1,0 +1,51 @@
+
+<div class="card-group">
+  <div class="card">
+    <img class="card-img-top img-card-contacto" [src]="contacto.img_direccion" [alt]="">
+    <div class="card-body">
+        <h5 class="card-title">{{contacto.titulo_direccion}}</h5>
+        <ul class="card-text">
+            <li> <span class="fw-bold">Localidad:</span> {{contacto.localidad}}</li>
+            <li> <span class="fw-bold">Direccion:</span> {{contacto.direccion}}</li>
+        </ul>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top img-card-contacto" [src]="contacto.img_horarios" [alt]="">
+    <div class="card-body">
+        <h5 class="card-title">{{contacto.titulo_horarios}}</h5>
+        <ul class="card-text">
+            <li> <span class="fw-bold">Lunes a Viernes: </span> 
+                <ol> <span class="text-decoration-underline">De Mañana:</span> 
+                    <ul>Desde las {{contacto['horario_i_mañana_entre_semana']}} hs</ul>
+                    <ul>Hasta las {{contacto['horario_f_mañana_entre_semana']}} hs</ul>
+                </ol>
+                <ol> <span class="text-decoration-underline">De Tarde:</span> 
+                    <ul>Desde las {{contacto['horario_i_tarde_entre_semana']}} hs</ul>
+                    <ul>Hasta las {{contacto['horario_f_tarde_entre_semana']}} hs</ul>
+                </ol>
+            </li>
+            <li> <span class="fw-bold">Sabados y Domingos:</span> 
+                <ol> <span class="text-decoration-underline">De corrido:</span> 
+                    <ul>Desde las {{contacto['horario_i_fin_de_semana']}} hs</ul>
+                    <ul>Hasta las {{contacto['horario_f_fin_de_semana']}} hs</ul>
+                </ol>
+            </li>
+        </ul>
+    </div>
+  </div>
+  <div class="card">
+    <img class="card-img-top img-card-contacto" [src]="contacto.img_redes" [alt]="">
+    <div class="card-body">
+        <h5 class="card-title">{{contacto.titulo_redes}}</h5>
+        <ul class="card-text">
+            <li> <span class="fw-bold">Facebook:</span> {{contacto.facebook}}</li>
+            <li> <span class="fw-bold">Instragram:</span> {{contacto.instragram}}</li>
+            <li> <span class="fw-bold">Tiktok:</span> {{contacto.tiktok}}</li>
+            <li> <span class="fw-bold">Email:</span> {{contacto.email}}</li>
+            <li> <span class="fw-bold">Twitter:</span> {{contacto.twitter}}</li>
+            <li> <span class="fw-bold">Whatsapp:</span> {{contacto.whatsapp}}</li>
+        </ul>
+    </div>
+  </div>
+</div>

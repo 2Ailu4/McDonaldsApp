@@ -1,5 +1,5 @@
-
-<table class="table text-center align-middle tabla-producto">
+<h1 class="text-center fw-semibold">Lista de Productos</h1>
+<table class="table text-center align-middle table-hover">
   <thead class="table-dark">
     <tr>
         <th scope="col" aria-label="Imagen"></th>
@@ -14,15 +14,26 @@
   </thead>
   <tbody>
 
-    <tr *ngFor="let producto of productos" [ngClass] = "{'oferta': producto.oferta}">
+    @for(producto of productos; track producto.nombre){
+      <tr [ngClass] = "{'oferta': producto.oferta}">
         <td class="td-ajustada p-0"> <img class="img-producto" [src]="producto.img" [alt]="producto.nombre"></td>
         <td>{{producto.nombre}}</td>
         <td>{{producto.tipo}}</td>
         <td>{{producto.precio | currency}}</td>
         <td>{{producto.unidades}}</td>
-        <td> <span *ngIf = "producto.stock!==0; else sinStock">{{producto.stock}}</span></td>
-            <!--else--><ng-template #sinStock> <span class="badge text-bg-danger fs-6">Sin Stock</span> </ng-template> 
-        <td> <span *ngIf = "producto.oferta" class="badge text-bg-success fs-6">En oferta</span> </td>
+
+        @if(producto.stock !== 0){
+          <td> <span>{{producto.stock}}</span></td>
+        }@else {
+          <td> <span class="badge text-bg-danger fs-6">Sin Stock</span> </td> 
+        }
+
+        @if(producto.oferta){
+          <td> <span class="badge text-bg-success fs-6">En oferta</span> </td>
+        }@else {
+          <td colspan="1"></td>
+        }
+
         <td> <!-- Cantidad a comprar -->
           <div class="d-flex align-items-center compra-producto">
             <button class="btn btn-secondary boton-compra me-2" (click)="decreaseCantidad(producto)"> - </button> 
@@ -33,8 +44,12 @@
             <button class="btn btn-secondary boton-compra ms-2" (click)="increaseCantidad(producto)"> + </button>
           </div> 
         </td>
-        
       </tr>
+    }@empty {
+      <tr>
+        <td colspan="8">No hay productos para mostrar.</td>
+      </tr>
+    }
 
   </tbody>
 </table>

@@ -3,10 +3,10 @@ import { Producto } from './Producto';
 
 
 @Component({
-  selector: 'app-McDonalds-list',
+  selector: 'app-mc-donalds-list',
   standalone: false,
-  templateUrl: './McDonalds-list.html',
-  styleUrl: './McDonalds-list.scss'
+  templateUrl: './mc-donalds-list.html',
+  styleUrl: './mc-donalds-list.scss'
 })
 
 export class McDonaldsList {
