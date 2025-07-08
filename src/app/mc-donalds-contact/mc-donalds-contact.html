@@ -10,30 +10,31 @@
         </ul>
     </div>
   </div>
+  
   <div class="card">
     <img class="card-img-top img-card-contacto" [src]="contacto.img_horarios" [alt]="">
     <div class="card-body">
         <h5 class="card-title">{{contacto.titulo_horarios}}</h5>
         <ul class="card-text">
             <li> <span class="fw-bold">Lunes a Viernes: </span> 
-                <ol> <span class="text-decoration-underline">De Mañana:</span> 
-                    <ul>Desde las {{contacto['horario_i_mañana_entre_semana']}} hs</ul>
-                    <ul>Hasta las {{contacto['horario_f_mañana_entre_semana']}} hs</ul>
-                </ol>
-                <ol> <span class="text-decoration-underline">De Tarde:</span> 
-                    <ul>Desde las {{contacto['horario_i_tarde_entre_semana']}} hs</ul>
-                    <ul>Hasta las {{contacto['horario_f_tarde_entre_semana']}} hs</ul>
+                <ol> 
+                    <ul>Desde las {{contacto['horario_i_mañana_entre_semana']}} hs 
+                        Hasta las {{contacto['horario_f_mañana_entre_semana']}} hs</ul>
+                 
+                    <ul>Y Desde las {{contacto['horario_i_tarde_entre_semana']}} hs 
+                        Hasta las {{contacto['horario_f_tarde_entre_semana']}} hs</ul>
                 </ol>
             </li>
             <li> <span class="fw-bold">Sabados y Domingos:</span> 
-                <ol> <span class="text-decoration-underline">De corrido:</span> 
-                    <ul>Desde las {{contacto['horario_i_fin_de_semana']}} hs</ul>
-                    <ul>Hasta las {{contacto['horario_f_fin_de_semana']}} hs</ul>
+                <ol> 
+                    <ul>Desde las {{contacto['horario_i_fin_de_semana']}} hs 
+                        Hasta las {{contacto['horario_f_fin_de_semana']}} hs</ul>
                 </ol>
             </li>
         </ul>
     </div>
   </div>
+
   <div class="card">
     <img class="card-img-top img-card-contacto" [src]="contacto.img_redes" [alt]="">
     <div class="card-body">

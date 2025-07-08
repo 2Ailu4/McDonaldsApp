@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import { McDonaldsContact } from './mc-donalds-contact/mc-donalds-contact';
 import { McDonaldsProducts } from './mc-donalds-products/mc-donalds-products';
 import { Cart } from './cart/cart';
+import { InputInteger } from './input-integer/input-integer';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { Cart } from './cart/cart';
     McDonaldsList,
     McDonaldsContact,
     McDonaldsProducts,
-    Cart
+    Cart,
+    InputInteger
   ],
   imports: [
     BrowserModule,

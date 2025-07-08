@@ -35,14 +35,7 @@
         }
 
         <td> <!-- Cantidad a comprar -->
-          <div class="d-flex align-items-center compra-producto">
-            <button class="btn btn-secondary boton-compra me-2" (click)="decreaseCantidad(producto)"> - </button> 
-            <input class = "input-cantidad" type = "text" 
-              [(ngModel)] = "producto.cantidad"
-              (input) = "validarCantidad($event, producto)">  <!--[()] es para decir que estamos conectados de ida y vuelta con producto.cantidad 
-                                                              (keyup) o (input) son eventos-->
-            <button class="btn btn-secondary boton-compra ms-2" (click)="increaseCantidad(producto)"> + </button>
-          </div> 
+          <app-input-integer [(cantidad)]="producto.cantidad" [max]="producto.stock" (maxAlcanzado)="maxAlcanzado($event)"></app-input-integer>
         </td>
       </tr>
     }@empty {
