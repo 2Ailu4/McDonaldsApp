@@ -5,6 +5,7 @@ export interface Producto {
     precio: number;
     unidades: number;
     stock: number;
-    oferta: boolean;
+    descuento: boolean;
     cantidad: number;
+    dosENuno: boolean;
 } 

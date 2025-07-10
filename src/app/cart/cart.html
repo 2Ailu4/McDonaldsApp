@@ -1,1 +1,36 @@
-<h1 class="text-center fw-semibold">Carrito de compras</h1>
+<h1 class="text-center fw-semibold">Carrito de compras🛒</h1>
+
+<div class="carrito">
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Precio</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      @for(producto of (cartList$ | async); track producto.nombre){
+          <tr>
+              <td>{{producto.nombre}}</td>
+              <td>{{producto.cantidad}}</td>
+              <td>{{producto.precio | currency}} c/u</td>
+          </tr>
+          
+      }@empty {
+        <tr>
+          <td class="text-center" colspan="3">Todavia no se agregaron productos al carrito</td>
+        </tr>
+      }
+      @if((total$| async) != 0){
+        <tr class="table-group-divider align-middle">
+          <td><button class="btn btn-warning" (click)="confirmarCompra()">Confirmar Compra</button></td>
+          <td class="fs-4 fw-semibold">Total: </td>
+          <td>{{(total$ | async | currency)}}</td>
+        </tr>
+      }
+      
+    </tbody>
+  </table>
+</div>
+

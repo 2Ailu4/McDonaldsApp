@@ -1,4 +1,4 @@
-<h1 class="text-center fw-semibold">Lista de Productos</h1>
+<h1 class="text-center fw-semibold">Lista de Productos🍟</h1>
 <table class="table text-center align-middle table-hover">
   <thead class="table-dark">
     <tr>
@@ -9,13 +9,13 @@
         <th>Unidades</th>
         <th>Stock</th>
         <th scope="col" aria-label="Producto en oferta"></th>
-        <th>Compra</th>
+        <th>Cantidad</th>
     </tr>
   </thead>
   <tbody>
 
     @for(producto of productos; track producto.nombre){
-      <tr [ngClass] = "{'oferta': producto.oferta}">
+      <tr [ngClass] = "{'sinStock': producto.stock == 0}">
         <td class="td-ajustada p-0"> <img class="img-producto" [src]="producto.img" [alt]="producto.nombre"></td>
         <td>{{producto.nombre}}</td>
         <td>{{producto.tipo}}</td>
@@ -23,19 +23,25 @@
         <td>{{producto.unidades}}</td>
 
         @if(producto.stock !== 0){
-          <td> <span>{{producto.stock}}</span></td>
+          <td> <span>{{producto.stock}}</span> </td>
         }@else {
           <td> <span class="badge text-bg-danger fs-6">Sin Stock</span> </td> 
+          <!-- *******ver de agregar la forma de tachar la fila por no tener stock******* -->
         }
 
-        @if(producto.oferta){
-          <td> <span class="badge text-bg-success fs-6">En oferta</span> </td>
+        @if(producto.descuento){
+          <td> <span class="badge enDescuento fs-6">⌛En descuento⌛</span> </td>
         }@else {
-          <td colspan="1"></td>
+          @if(producto.dosENuno){
+            <td> <span class="badge en2x1 fs-6">⚡En 2x1⚡</span> </td>
+          }@else {
+            <td colspan="1"></td>
+          }
         }
 
         <td> <!-- Cantidad a comprar -->
           <app-input-integer [(cantidad)]="producto.cantidad" [max]="producto.stock" (maxAlcanzado)="maxAlcanzado($event)"></app-input-integer>
+          <button class="btn btn-outline-warning button-comprar" (click)="agregarCarrito(producto)">Comprar</button>
         </td>
       </tr>
     }@empty {

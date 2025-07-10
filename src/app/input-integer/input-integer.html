@@ -1,8 +1,8 @@
 <div class="d-flex align-items-center compra-producto">
-    <button class="btn btn-danger boton-compra me-2" (click)="decreaseCantidad()"> - </button> 
+    <button class="btn btn-warning boton-compra me-2" (click)="decrCantidad()"> - </button> 
     <input type = "text" 
         [(ngModel)] = "cantidad"
         (input) = "validarCantidad($event)">  <!--[()] es para decir que estamos conectados de ida y vuelta con producto.cantidad 
                                                         (keyup) o (input) son eventos-->
-    <button class="btn btn-danger boton-compra ms-2" (click)="increaseCantidad()"> + </button>
+    <button class="btn btn-warning boton-compra ms-2" (click)="incrCantidad()"> + </button>
 </div> 

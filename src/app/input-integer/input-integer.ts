@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Producto } from '../mc-donalds-list/Producto';
 
 @Component({
   selector: 'app-input-integer',
@@ -18,7 +17,7 @@ export class InputInteger {
 
   @Output() maxAlcanzado: EventEmitter<string> = new EventEmitter<string>
 
-  increaseCantidad():void{
+  incrCantidad():void{
     if(this.cantidad < this.max){
       this.cantidad++;
       this.cantidadChange.emit(this.cantidad);
@@ -31,7 +30,7 @@ export class InputInteger {
     }
   }
 
-  decreaseCantidad():void{
+  decrCantidad():void{
     if(this.cantidad > 0){
       this.cantidad--;
       this.cantidadChange.emit(this.cantidad);

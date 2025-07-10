@@ -2,20 +2,29 @@
   width: 100px; 
   height: 100px; 
   object-fit: contain;
-  // background-color: white;
 }
 
-tr.oferta td {
-  background: rgb(252, 231, 69);
+tr.sinStock td {
+  // background: rgb(252, 231, 69);
+  background: rgba(248, 53, 53, 0.714);
   border-top: 2px solid black;
   border-bottom: 2px solid black;
 }
 
-tr.oferta td:first-child { //td:first-child = selecciona el primer <td> hijo dentro de su padre
+.enDescuento{
+  // background: rgb(125, 55, 245);
+  background: rgb(255, 136, 0);
+}
+
+.en2x1{
+  background: green;
+}
+
+tr.sinStock td:first-child { //td:first-child = selecciona el primer <td> hijo dentro de su padre
   border-left: 2px solid black;
 }
 
-tr.oferta td:last-child {
+tr.sinStock td:last-child {
   border-right: 2px solid black;
 }
 
@@ -23,5 +32,9 @@ tr.oferta td:last-child {
   text-align: center;
 }
 
-
+.button-comprar{
+  border: 1px solid black;
+  margin: 5px;
+  padding: 3px;
+}
 

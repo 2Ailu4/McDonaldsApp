@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Producto } from './Producto';
+import { ProductCartService } from '../product-cart-service';
 
 
 @Component({
@@ -19,9 +20,9 @@ export class McDonaldsList {
       precio: 7300 ,
       unidades: 1,
       stock: 20,
-      oferta: true,
+      descuento: true,
       cantidad: 0,
-
+      dosENuno: false,
     },
     {
       img: "assets/img/CuartoDeLibraConQueso.png",
@@ -30,8 +31,9 @@ export class McDonaldsList {
       precio: 6300,
       unidades: 1,
       stock: 5,
-      oferta: false,
+      descuento: false,
       cantidad: 0,
+      dosENuno: false,
     },
     {
       img: "assets/img/McFiesta.png",
@@ -40,8 +42,9 @@ export class McDonaldsList {
       precio: 2900,
       unidades: 1,
       stock: 0,
-      oferta: false,
+      descuento: false,
       cantidad: 0,
+      dosENuno: true,
     },
     {
       img: "assets/img/McChicken.png",
@@ -50,8 +53,9 @@ export class McDonaldsList {
       precio: 1700,
       unidades: 1,
       stock: 12,
-      oferta: true,
+      descuento: true,
       cantidad: 0,
+      dosENuno: false,
     },
     {
       img: "assets/img/McNuggets.png",
@@ -60,8 +64,9 @@ export class McDonaldsList {
       precio: 1900,
       unidades: 6,
       stock: 7,
-      oferta: false,
+      descuento: false,
       cantidad: 0,
+      dosENuno: false,
     },
     {
       img: "assets/img/PapasFritasMedianas.png",
@@ -70,8 +75,9 @@ export class McDonaldsList {
       precio: 180,
       unidades: 1,
       stock: 31,
-      oferta: false,
+      descuento: false,
       cantidad: 0,
+      dosENuno: true,
     },
     {
       img: "assets/img/EnsaladaCesar.png",
@@ -80,8 +86,9 @@ export class McDonaldsList {
       precio: 6990,
       unidades: 1,
       stock: 0,
-      oferta: true,
+      descuento: false,
       cantidad: 0,
+      dosENuno: false,
     },
     {
       img: "assets/img/Cajitafeliz.png",
@@ -90,18 +97,32 @@ export class McDonaldsList {
       precio: 350,
       unidades: 1,
       stock: 19,
-      oferta: true,
+      descuento: false,
       cantidad: 0,
+      dosENuno: false,
     },
   ]
-
-  constructor() {}
+  
+  constructor(private cart: ProductCartService) {
+    
+  }
 
   maxAlcanzado(mensaje:string){
       alert(mensaje);     //podria aparecer un input que verifique si la persona es mayor de edad o si quiere comprar para mayorista por ej 
                           //en caso que sea menor de edad o quiera comprar para mayorista podria hacer que ya no pueda ver los productos 
   }
 
+  agregarCarrito(producto:Producto):void{
+    if(producto.cantidad != 0){
+      this.cart.agregarCarrito(producto);
+    }
+    if(producto.dosENuno){
+      producto.stock -= producto.cantidad * 2;
+    }else{
+      producto.stock -= producto.cantidad;
+    }
+    producto.cantidad = 0;
+  }
   
   
 }
