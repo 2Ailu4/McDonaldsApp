@@ -1,11 +1,16 @@
 export interface Producto {
+    id: number;
     img: string;
     nombre: string;
     tipo: string;   //hamburguesa, papas, cajita feliz, bebida,...
     precio: number;
-    unidades: number;
+    unidad: number;
     stock: number;
     descuento: boolean;
     cantidad: number;
-    dosENuno: boolean;
+    dosXuno: boolean;
 } 
+
+// export interface ProductoItem extends Producto{
+//     cantidad: number;
+// }

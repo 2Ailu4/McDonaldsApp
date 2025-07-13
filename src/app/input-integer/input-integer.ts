@@ -8,12 +8,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 
 export class InputInteger {
-  @Input() cantidad!: number; // @Input: “Este valor va a ser asignado externamente (por Angular) 
-                                // antes de que lo use, así que no me tires error por no inicializarlo 
-                                // yo mismo”.
+  @Input() cantidad!: number;  // [cantidad]: producto.cantidad;  el padre le pasa por parametro la variable (por copia)
+
   @Input() max!: number;
 
-  @Output() cantidadChange: EventEmitter<number> = new EventEmitter<number>
+  @Output() cantidadChange: EventEmitter<number> = new EventEmitter<number> // el hijo de devuelve la variable modificada para 
+  //que el padre le pueda actualizar el valor (cantidad) = this.cantidadChange.emit(this.cantidad)
 
   @Output() maxAlcanzado: EventEmitter<string> = new EventEmitter<string>
 

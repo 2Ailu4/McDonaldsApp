@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ProductCartService } from '../product-cart-service';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ProductCartService } from '../product-cart.service';
 import { Producto } from '../mc-donalds-list/Producto';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
+import { ProductDataService } from '../product-data.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,24 +12,63 @@ import { Observable } from 'rxjs';
 })
 
 export class Cart {
-  cartList$: Observable<Producto[]> | undefined;
-  total$: Observable<number> | undefined;
+  cartList$!: Observable<Producto[]>;
+  // productoActualizado!: Producto;
+  total$!: Observable<number>;
   
-  constructor(private cart: ProductCartService){
-    this.cartList$ = cart.cartList.asObservable();
+  // **********Ver si implemento el actualizar el mensaje del carrito cuando este vacio y cuando se confirme la compra*****************
+  // @Output() estadoLista: EventEmitter<string> = new EventEmitter<string>
+  // this.estadoLista.emit("Todavia no se agregaron productos al carrito");
+  // this.estadoLista.emit("Gracias por su compra!!!");
+  // ************************************************************************
 
-    this.total$ = cart.total.asObservable();  
+  constructor(private cartService: ProductCartService,
+              private dataService: ProductDataService){
+    
+    this.cartList$ = cartService.cartList.asObservable();
+    this.total$ = cartService.total.asObservable();  
   }
 
-  confirmarCompra(){
-    if(confirm("Esta seguro que desea confirmar?")){
-      //Reiniciar carrito y arrojar mensaje de compra realizada
-    }else{
-      //nada??
+
+  
+
+// -------------------Actualizar(PUT)---------------------
+  // Al "confirmar compra" se debe resetear el carrito y descontar el stock de los productos comprados permanentemente en el servidor
+  confirmarCompra() {
+    if (confirm("¿Está seguro que desea confirmar su compra?")) {
+      this.cartList$?.subscribe(productos => {
+                                  const peticiones = productos.map(producto => {
+                                      const productoActualizado = {...producto, stock: producto.stock - producto.cantidad};
+                                      return this.dataService.putById(producto.id, productoActualizado);
+                                  });
+
+                                  forkJoin(peticiones).subscribe({  // forkJoin espera que todas las peticiones PUT terminen antes de seguir.
+                                                        next: () => {
+                                                          this.dataService.refrescarLista();           // Actualiza product-list.ts
+                                                          this.cartService.vaciarCarrito();            // Vacía el carrito
+                                                          
+                                                          // ****************************************************************************************
+                                                          // *******IDEA:::LLEVAR A LA PANTALLA DE INICIO Y ARROJAR MENSAJE DE "GRACIAS POR SU COMPRA"******
+                                                          // ****************************************************************************************
+                                                        },
+                                                        error: err => console.error('Error al confirmar compra', err)
+                                  });
+      });
     }
+  }
+
+
+// ---------------Eliminar un producto del carrito----------------
+  eliminarProducto(producto: Producto): void {
+    // this.dataService.deleteById(producto.id).subscribe({ 
+    //                                             next: () => {
+    //                                               this.cart.removeFromCart(producto); 
+    //                                               console.log('Producto eliminado con éxito.');
+    //                                             },
+    //                                             error: (err) => console.error('Error al eliminar producto:', err)
+    //                                           });
   }
 
 
 }
 
-// cart.cartList.subscribe((observable) => this.cartList = observable);

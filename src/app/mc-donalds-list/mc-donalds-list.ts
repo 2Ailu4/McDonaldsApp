@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Producto } from './Producto';
-import { ProductCartService } from '../product-cart-service';
+import { ProductCartService } from '../product-cart.service';
+import { ProductDataService } from '../product-data.service';
 
 
 @Component({
@@ -12,99 +13,23 @@ import { ProductCartService } from '../product-cart-service';
 
 export class McDonaldsList {
   
-  productos: Producto[] = [
-    {
-      img: "assets/img/BigMac.png",
-      nombre: "Big Mac",
-      tipo: "Hamburguesa",  
-      precio: 7300 ,
-      unidades: 1,
-      stock: 20,
-      descuento: true,
-      cantidad: 0,
-      dosENuno: false,
-    },
-    {
-      img: "assets/img/CuartoDeLibraConQueso.png",
-      nombre: "Cuarto de Libra con Queso",
-      tipo: "Hamburguesa",  
-      precio: 6300,
-      unidades: 1,
-      stock: 5,
-      descuento: false,
-      cantidad: 0,
-      dosENuno: false,
-    },
-    {
-      img: "assets/img/McFiesta.png",
-      nombre: "Mc Fiesta",
-      tipo: "Hamburguesa",
-      precio: 2900,
-      unidades: 1,
-      stock: 0,
-      descuento: false,
-      cantidad: 0,
-      dosENuno: true,
-    },
-    {
-      img: "assets/img/McChicken.png",
-      nombre: "Mc Chicken",
-      tipo: "Pollo",
-      precio: 1700,
-      unidades: 1,
-      stock: 12,
-      descuento: true,
-      cantidad: 0,
-      dosENuno: false,
-    },
-    {
-      img: "assets/img/McNuggets.png",
-      nombre: "Mc Nuggets",
-      tipo: "Pollo",
-      precio: 1900,
-      unidades: 6,
-      stock: 7,
-      descuento: false,
-      cantidad: 0,
-      dosENuno: false,
-    },
-    {
-      img: "assets/img/PapasFritasMedianas.png",
-      nombre: "Papas Fritas Medianas",
-      tipo: "Acompañamiento",
-      precio: 180,
-      unidades: 1,
-      stock: 31,
-      descuento: false,
-      cantidad: 0,
-      dosENuno: true,
-    },
-    {
-      img: "assets/img/EnsaladaCesar.png",
-      nombre: "Ensalada Cesar",
-      tipo: "Acompañamiento",
-      precio: 6990,
-      unidades: 1,
-      stock: 0,
-      descuento: false,
-      cantidad: 0,
-      dosENuno: false,
-    },
-    {
-      img: "assets/img/Cajitafeliz.png",
-      nombre: "Cajita Feliz",
-      tipo: "Combo",
-      precio: 350,
-      unidades: 1,
-      stock: 19,
-      descuento: false,
-      cantidad: 0,
-      dosENuno: false,
-    },
-  ]
+  productos: Producto[] = []; 
   
-  constructor(private cart: ProductCartService) {
+  constructor(private cartService: ProductCartService, 
+              private dataService: ProductDataService) {
     
+  }
+
+                                                //el ngOnInit() se usa solo: - Para inicializar datos que dependen de servicios.
+                                                //                        // - Para suscribirse a observables.
+                                                //                        // - Para hacer llamadas HTTP.
+                                                //                        // - Para preparar el estado inicial del componente. 
+  ngOnInit(): void{
+    this.dataService.productos$.subscribe(productos => { //si me suscribo luego tengo que desuscribirme --> al usar el async en el html la desuscripcion se hace sola
+                                            this.productos = productos
+                                          }); 
+
+    this.dataService.refrescarLista();  //primera carga
   }
 
   maxAlcanzado(mensaje:string){
@@ -114,9 +39,9 @@ export class McDonaldsList {
 
   agregarCarrito(producto:Producto):void{
     if(producto.cantidad != 0){
-      this.cart.agregarCarrito(producto);
+      this.cartService.agregarCarrito(producto);
     }
-    if(producto.dosENuno){
+    if(producto.dosXuno){
       producto.stock -= producto.cantidad * 2;
     }else{
       producto.stock -= producto.cantidad;

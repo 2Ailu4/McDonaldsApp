@@ -10,6 +10,7 @@ import { McDonaldsContact } from './mc-donalds-contact/mc-donalds-contact';
 import { McDonaldsProducts } from './mc-donalds-products/mc-donalds-products';
 import { Cart } from './cart/cart';
 import { InputInteger } from './input-integer/input-integer';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { InputInteger } from './input-integer/input-integer';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
