@@ -16,7 +16,7 @@
               <td>{{producto.nombre}}</td>
               <td>{{producto.cantidad}}</td>
               <td>{{producto.precio | currency}} c/u</td>
-              <td> <button class="px-0 py-0 btn btn-danger" (click)="eliminarProducto(producto)"> <span class="">Remover</span> </button> </td>
+              <td> <button class="px-0 py-0 btn btn-danger" (click)="removerProducto(producto)"> <span class="">Remover</span> </button> </td>
           </tr>
           
       }@empty {

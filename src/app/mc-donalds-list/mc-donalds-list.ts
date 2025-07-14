@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Producto } from './Producto';
 import { ProductCartService } from '../product-cart.service';
 import { ProductDataService } from '../product-data.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,12 +13,19 @@ import { ProductDataService } from '../product-data.service';
 })
 
 export class McDonaldsList {
+  // -----------------------------------------
+  // dataList$!: Observable<Producto[]>;
+  // -----------------------------------------
   
   productos: Producto[] = []; 
+ 
   
   constructor(private cartService: ProductCartService, 
               private dataService: ProductDataService) {
-    
+    // -----------------------------------------
+    //this.dataList$ = dataService.dataList.asObservable();
+    // this.dataList$ = dataService.productos$;
+    // -------------------------------------------
   }
 
                                                 //el ngOnInit() se usa solo: - Para inicializar datos que dependen de servicios.
@@ -28,7 +36,7 @@ export class McDonaldsList {
     this.dataService.productos$.subscribe(productos => { //si me suscribo luego tengo que desuscribirme --> al usar el async en el html la desuscripcion se hace sola
                                             this.productos = productos
                                           }); 
-
+                                         
     this.dataService.refrescarLista();  //primera carga
   }
 
@@ -37,17 +45,50 @@ export class McDonaldsList {
                           //en caso que sea menor de edad o quiera comprar para mayorista podria hacer que ya no pueda ver los productos 
   }
 
-  agregarCarrito(producto:Producto):void{
-    if(producto.cantidad != 0){
-      this.cartService.agregarCarrito(producto);
+  // agregarCarrito(producto:Producto):void{
+  //   if(producto.cantidad != 0){
+  //     this.cartService.agregarCarrito(producto);
+  //   }
+  //   if(producto.dosXuno){
+  //     producto.stock -= producto.cantidad * 2;
+  //   }else{
+  //     producto.stock -= producto.cantidad;
+  //   }
+  //   producto.cantidad = 0;
+  // }
+ 
+
+
+
+  agregarCarrito(producto: Producto): void {
+    if (producto.cantidad > 0) {
+
+      if (producto.dosXuno) {
+        producto.stock -= producto.cantidad * 2;   
+      } else {
+        producto.stock -= producto.cantidad;
+      }
+
+      this.cartService.agregarCarrito(producto); // Envio el clon al carrito
+
+      producto.cantidad = 0;
     }
-    if(producto.dosXuno){
-      producto.stock -= producto.cantidad * 2;
-    }else{
-      producto.stock -= producto.cantidad;
-    }
-    producto.cantidad = 0;
   }
+
+
+
+
+
+
+
+
+// VERRRRRRRRRRRRRRRRRRRRRRRRR MAS ADELANTEEEEEE DE CAMBIARLO ASI
+  // agregarCarrito(producto: Producto): void {
+  //   // if (producto.cantidad > 0) {
+  //     this.dataService.descontarStock(producto);
+  //     this.cartService.agregarCarrito(producto);
+  //   // }
+  // }
   
   
 }
