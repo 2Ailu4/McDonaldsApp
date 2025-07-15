@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Producto } from './mc-donalds-list/Producto';
 import { BehaviorSubject } from 'rxjs';
-
-//*****Maneja la logica del carrito*****
+                                            // -------------------------------------
+                                            //*****Maneja la logica del carrito*****
+                                            // -------------------------------------
 @Injectable({        
   providedIn: 'root'
 })
@@ -18,7 +19,6 @@ export class ProductCartService {
   constructor() { }
   
   agregarCarrito(producto: Producto) { 
-    // if (producto.cantidad > 0){
       let item: Producto | undefined = this._cartList.find((productoCart) => productoCart.id == producto.id);  //busca si en la lista si hay alguna cerveza que tenga el mismo nombre
      
       if(!item && producto.dosXuno){
@@ -41,7 +41,6 @@ export class ProductCartService {
 
       this.total.next(this.total.value + (producto.precio * producto.cantidad)); // Calcula el total cada vez que cambia el carrito
     
-    // }
     
   }
 

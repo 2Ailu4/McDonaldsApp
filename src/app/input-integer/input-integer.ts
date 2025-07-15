@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+                      // -------------------------------------------------------------------------------------
+                      //*****Input para especificar la cantidad de unidades que se quieren de un prodcuto*****
+                      // -------------------------------------------------------------------------------------
 @Component({
   selector: 'app-input-integer',
   standalone: false,

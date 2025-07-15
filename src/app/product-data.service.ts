@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Producto } from './mc-donalds-list/Producto';
 
+                        // ------------------------------------------------------------------
+                        // *****Maneja la comunicacion con el servidor y Maneja la lista*****
+                        // ------------------------------------------------------------------
+
 const URL = 'https://68715ec876a5723aacd1c79a.mockapi.io/api/McDonalds-App/products';
 
 @Injectable({
@@ -10,72 +14,74 @@ const URL = 'https://68715ec876a5723aacd1c79a.mockapi.io/api/McDonalds-App/produ
 })
 
 export class ProductDataService {
- // ----------------------------------     ************ VERRRRR DE IMPLEMNTARLO ASI*************
- // private _dataList: Producto[] = [];
-  //dataList: BehaviorSubject<Producto[]> = new BehaviorSubject<Producto[]>([]);
-  // ----------------------------------
+  private _dataList: Producto[] = [];
+  dataList: BehaviorSubject<Producto[]> = new BehaviorSubject(this._dataList);
+
+  constructor(private http:HttpClient) {
+    this.refrescarLista();
+  }
 
 
-  // descontarStock(producto: Producto) {
-  //   let item = this.productosSubject.getValue().find((productoCart) => productoCart.id == producto.id); 
-  //   if(item){
-  //     if (item.dosXuno) {
-  //       item.stock -= producto.cantidad * 2;
-  //     } else {
-  //       item.stock -= producto.cantidad;
-  //     }
-
-  //     item.cantidad = 0;
-  //   }
-  //   this.productosSubject.next(this.productosSubject.getValue());
-  // }
-
-
- 
-  constructor(private http:HttpClient) { }
 
   public getAll(): Observable<Producto[]>{
-    // return this.http.get<Producto[]>(URL);
     return this.http.get<Producto[]>(URL)
               .pipe(tap((producto: Producto[]) =>   //tap ejecuta efectos secundarios sin modificar los valores emitidos
                 producto.forEach(producto => producto.cantidad = 0)));
   }
 
-  public deleteById(id: string): Observable<any> {
-    const deleteURL = `${URL}/${id}`;
-    return this.http.delete(deleteURL);
-  }
+  // public deleteById(id: string): Observable<any> {
+  //   const deleteURL = `${URL}/${id}`;
+  //   return this.http.delete(deleteURL);
+  // }
 
   public putById(id: number, producto: Producto): Observable<Producto>{
     const putURL = `${URL}/${id}`;
     return this.http.put<Producto>(putURL, producto);
   }
 
+
+
+// -----------------------Agregar al carrito---------------------------------
+// Al agregar al carrito un producto se debe descontar el stock del producto en la lista
+  descontarStock(producto: Producto) {
+    let item = this._dataList.find((productoCart) => productoCart.id == producto.id); 
+    if(item){
+      if (item.dosXuno) {
+        item.stock -= producto.cantidad * 2;
+      } else {
+        item.stock -= producto.cantidad;
+      }
+    }
+    this.dataList.next(this._dataList);
+
+  }
+
   
 // -------------------------------- PUT -------------------------------------
 // Cuando en cart.ts se realice un "confirmar cambios", se debe refrescar la lista y asi toda la app quedara sincronizada.
-  private productosSubject = new BehaviorSubject<Producto[]>([]);
-  public productos$ = this.productosSubject.asObservable();
-
   public refrescarLista(): void {
     this.getAll().subscribe(productos => {
-                              this.productosSubject.next(productos);
-                              // productos.forEach(p => console.log("IDDDD,,,,", p.id,"CANTIDAD.....", p.cantidad, "STOCK:::", p.stock));
+                              this._dataList = productos;
+                              this.dataList.next(this._dataList);
                             });
   }
 
   // ---------------------- Remover del carrito -----------------------------
+  // Al quitar un producto del carrito porque ya no se lo quiere comprar se debe volver el stock del producto de la lista 
+  // al valor que tenia antes de elegir comprarlo
   public aumentarStock(id: number, cantidad: number): void {
-    const productosActualizados = this.productosSubject.getValue().map(producto => {
-                                                                        if (producto.id === id) {
-                                                                          return { ...producto, stock: producto.stock + cantidad };
-                                                                        }
-                                                                        return producto;
-                                  });
-    this.productosSubject.next(productosActualizados);
+    this._dataList = this._dataList.map(producto => {
+      if (producto.id === id) {
+        return { ...producto, stock: producto.stock + cantidad}; 
+      }
+      return producto;
+    });
+
+    this.dataList.next(this._dataList);
   }
 
 
+  
 
 
 }

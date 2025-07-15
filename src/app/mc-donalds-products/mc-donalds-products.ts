@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+                                            // ----------------------------------
+                                            //*****Contenedor de componentes*****
+                                            // ----------------------------------
 
 @Component({
   selector: 'app-mc-donalds-products',

@@ -13,8 +13,7 @@
     </tr>
   </thead>
   <tbody>
-
-    @for(producto of productos; track producto.nombre){
+    @for(producto of (dataList$ | async); track producto.nombre){
       <tr [ngClass] = "{'sinStock': producto.stock == 0}">
         <td class="td-ajustada p-0"> <img class="img-producto" [src]="producto.img" [alt]="producto.nombre"></td>
         <td>{{producto.nombre}}</td>

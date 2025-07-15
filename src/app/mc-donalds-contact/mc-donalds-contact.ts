@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+                                            // -------------------------------------
+                                            //*****Informacion sobre Mc Donlads*****
+                                            // -------------------------------------
 
 @Component({
   selector: 'app-mc-donalds-contact',
