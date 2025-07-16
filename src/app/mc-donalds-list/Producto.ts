@@ -10,7 +10,3 @@ export interface Producto {
     cantidad: number;
     dosXuno: boolean;
 } 
-
-// export interface ProductoItem extends Producto{
-//     cantidad: number;
-// }

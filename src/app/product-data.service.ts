@@ -13,18 +13,17 @@ const URL = 'https://68715ec876a5723aacd1c79a.mockapi.io/api/McDonalds-App/produ
   providedIn: 'root'
 })
 
+
 export class ProductDataService {
   private _dataList: Producto[] = [];
   dataList: BehaviorSubject<Producto[]> = new BehaviorSubject(this._dataList);
 
   constructor(private http:HttpClient) {
-    this.refrescarLista();
+    this.refrescarLista(); 
   }
 
-
-
   public getAll(): Observable<Producto[]>{
-    return this.http.get<Producto[]>(URL)
+    return this.http.get<Producto[]>(URL) 
               .pipe(tap((producto: Producto[]) =>   //tap ejecuta efectos secundarios sin modificar los valores emitidos
                 producto.forEach(producto => producto.cantidad = 0)));
   }
@@ -40,7 +39,6 @@ export class ProductDataService {
   }
 
 
-
 // -----------------------Agregar al carrito---------------------------------
 // Al agregar al carrito un producto se debe descontar el stock del producto en la lista
   descontarStock(producto: Producto) {
@@ -53,7 +51,6 @@ export class ProductDataService {
       }
     }
     this.dataList.next(this._dataList);
-
   }
 
   
@@ -65,6 +62,7 @@ export class ProductDataService {
                               this.dataList.next(this._dataList);
                             });
   }
+// 
 
   // ---------------------- Remover del carrito -----------------------------
   // Al quitar un producto del carrito porque ya no se lo quiere comprar se debe volver el stock del producto de la lista 
@@ -77,11 +75,8 @@ export class ProductDataService {
       return producto;
     });
 
-    this.dataList.next(this._dataList);
+    this.dataList.next(this._dataList); 
   }
-
-
-  
 
 
 }

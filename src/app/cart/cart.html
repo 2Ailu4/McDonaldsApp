@@ -1,38 +1,44 @@
 <h1 class="text-center fw-semibold">Carrito de compras🛒</h1>
 
-<div class="carrito">
-  <table class="table text-center align-middle">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Cantidad</th>
-        <th scope="col">Precio</th>
-        <th scope="col" aria-label="remover del carrito"></th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      @for(producto of (cartList$ | async); track producto.nombre){
-          <tr>
-              <td>{{producto.nombre}}</td>
-              <td>{{producto.cantidad}}</td>
-              <td>{{producto.precio | currency}} c/u</td>
-              <td> <button class="px-0 py-0 btn btn-danger" (click)="removerProducto(producto)"> <span class="">Remover</span> </button> </td>
-          </tr>
-          
-      }@empty {
+<div class="carrito sombreado">
+  
+  @if(!mostrarCarrito){
+    <app-sign-up (formularioValido)="onFormularioValido($event)"> </app-sign-up>
+  }@else {
+    <table class="table text-center align-middle">
+      <thead class="table-dark">
         <tr>
-          <td class="text-center" colspan="3">{{mensaje}}</td>
+          <th scope="col">Nombre</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col" aria-label="remover del carrito"></th>
         </tr>
-      }
-      @if((total$| async) != 0){
-        <tr class="table-group-divider align-middle">
-          <td><button class="btn btn-warning" (click)="confirmarCompra()">Confirmar Compra</button></td>
-          <td class="fs-4 fw-semibold">Total: </td>
-          <td>{{((total$ | async) | currency)}}</td>
-        </tr>
-      }
-      
-    </tbody>
-  </table>
+      </thead>
+      <tbody class="table-group-divider">
+        @for(producto of (cartList$ | async); track producto.id){
+            <tr>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.cantidad}}</td>
+                <td>{{producto.precio | currency}} c/u</td>
+                <td> <button class="px-0 py-0 btn btn-danger" (click)="removerProducto(producto)"> <span class="">Remover</span> </button> </td>
+            </tr>
+            
+        }@empty {
+          <tr>
+            <td class="text-center" colspan="3">{{mensaje}}</td>
+          </tr>
+        }
+        @if((total$| async) != 0){
+          <tr class="table-group-divider align-middle">
+            <td></td>
+            <td class="fs-4 fw-semibold">Total: </td>
+            <td>{{((total$ | async) | currency)}}</td>
+            <td><button class="btn btn-warning btn-sm" (click)="confirmarCompra()">Confirmar Compra</button></td>
+          </tr>
+        }
+        
+      </tbody>
+    </table>
+  }
 </div>
 

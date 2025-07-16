@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { McDonaldsList } from './mc-donalds-list/mc-donalds-list';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { McDonaldsContact } from './mc-donalds-contact/mc-donalds-contact';
 import { McDonaldsProducts } from './mc-donalds-products/mc-donalds-products';
 import { Cart } from './cart/cart';
 import { InputInteger } from './input-integer/input-integer';
 import { HttpClientModule } from '@angular/common/http';
+import { SignUp } from './sign-up/sign-up';
 
 @NgModule({
   declarations: [
@@ -19,13 +20,15 @@ import { HttpClientModule } from '@angular/common/http';
     McDonaldsContact,
     McDonaldsProducts,
     Cart,
-    InputInteger
+    InputInteger,
+    SignUp
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

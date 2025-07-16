@@ -17,6 +17,8 @@ export class Cart {
   cartList$!: Observable<Producto[]>;
   total$!: Observable<number>;
 
+  mostrarCarrito: boolean = false;
+
   mensaje: string;    
 
   constructor(private cartService: ProductCartService,
@@ -31,21 +33,22 @@ export class Cart {
 // ------------------- PUT ---------------------
   // Al "confirmar compra" se debe resetear el carrito y descontar el stock de los productos comprados permanentemente en el servidor
   confirmarCompra() {
-    if (confirm("¿Está seguro que desea confirmar su compra?")) {
-      this.cartList$.pipe(take(1)).subscribe(productos => {
-                                  const peticiones = productos.map(producto => {
-                                      const productoActualizado = {...producto, stock: producto.stock - producto.cantidad};
-                                      return this.dataService.putById(producto.id, productoActualizado);
-                                  });
-                                  forkJoin(peticiones).subscribe({  // forkJoin espera que todas las peticiones PUT terminen antes de seguir.
-                                                        next: () => {
-                                                          this.dataService.refrescarLista();  // Actualiza product-list.ts
-                                                          this.cartService.vaciarCarrito();   // Vacía el carrito
-                                                        },
-                                                        error: err => console.error('Error al confirmar compra', err)
-                                  });
-      });
-    }
+      if (confirm("¿Está seguro que desea confirmar su compra?")) { 
+        this.cartList$.pipe(take(1)).subscribe(productos => {
+                                    const peticiones = productos.map(producto => {
+                                        const productoActualizado = {...producto, stock: producto.stock - producto.cantidad};
+                                        console.log("aaaa", productoActualizado);
+                                        return this.dataService.putById(producto.id, productoActualizado);
+                                    });
+                                    forkJoin(peticiones).subscribe({  // forkJoin espera que todas las peticiones PUT terminen antes de seguir.
+                                                          next: () => {
+                                                            this.dataService.refrescarLista();  // Actualiza product-list.ts 
+                                                            this.cartService.vaciarCarrito();   // Vacía el carrito
+                                                          },
+                                                          error: err => console.error('Error al confirmar compra', err)
+                                    });
+        });
+      }
     this.mensaje = "Gracias por su compra!!!";
   }
 
@@ -62,7 +65,9 @@ export class Cart {
     this.mensaje = "Agregue los productos que mas le gusten";
   }
   
-
+  onFormularioValido(valido: boolean) {
+    this.mostrarCarrito = valido;
+  }
 
 }
 

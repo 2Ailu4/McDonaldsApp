@@ -12,8 +12,8 @@
         <th>Cantidad</th>
     </tr>
   </thead>
-  <tbody>
-    @for(producto of (dataList$ | async); track producto.nombre){
+  <tbody> 
+    @for(producto of (dataList$ | async); track producto.id){
       <tr [ngClass] = "{'sinStock': producto.stock == 0}">
         <td class="td-ajustada p-0"> <img class="img-producto" [src]="producto.img" [alt]="producto.nombre"></td>
         <td>{{producto.nombre}}</td>
@@ -25,7 +25,6 @@
           <td> <span>{{producto.stock}}</span> </td>
         }@else {
           <td> <span class="badge text-bg-danger fs-6">Sin Stock</span> </td> 
-          <!-- *******ver de agregar la forma de tachar la fila por no tener stock******* -->
         }
 
         @if(producto.descuento){
