@@ -3,6 +3,7 @@ import { Producto } from './Producto';
 import { ProductCartService } from '../product-cart.service';
 import { ProductDataService } from '../product-data.service';
 import { Observable } from 'rxjs';
+import { FormStatusService } from '../form-status.service';
                                             // -----------------------------------------
                                             //*****Lista de Productos de Mc Donlads*****
                                             // -----------------------------------------
@@ -16,10 +17,11 @@ import { Observable } from 'rxjs';
 
 export class McDonaldsList {
   dataList$!: Observable<Producto[]>;
-   
+  formularioValido: boolean = false;
   
   constructor(private cartService: ProductCartService, 
-              private dataService: ProductDataService) {
+              private dataService: ProductDataService,
+              private formStatusService: FormStatusService) {
     this.dataList$ = dataService.dataList.asObservable();
   }
 
@@ -28,6 +30,9 @@ export class McDonaldsList {
       //                        // - Para suscribirse a observables.
       //                        // - Para hacer llamadas HTTP.
       //                        // - Para preparar el estado inicial del componente. 
+      this.formStatusService.formularioValido$.subscribe(valido => {
+              this.formularioValido = valido;
+            });
     }
 
   maxAlcanzado(mensaje:string){ 

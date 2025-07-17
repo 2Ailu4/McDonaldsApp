@@ -1,4 +1,4 @@
-<h1 class="text-center fw-semibold">Lista de Productos🍟</h1>
+<h1 class="text-center fw-semibold">Productos🍟</h1>
 <table class="table text-center align-middle table-hover">
   <thead class="table-dark">
     <tr>
@@ -8,7 +8,7 @@
         <th>Precio</th>
         <th>Unidad</th>
         <th>Stock</th>
-        <th scope="col" aria-label="Producto en oferta"></th>
+        <th>Promocion</th>
         <th>Cantidad</th>
     </tr>
   </thead>
@@ -43,7 +43,11 @@
             [max]="producto.stock" 
             (maxAlcanzado)="maxAlcanzado($event)">
           </app-input-integer>
-          <button class="btn btn-outline-warning button-comprar" (click)="agregarCarrito(producto)">Comprar</button>
+          <button class="btn btn-outline-warning button-comprar" 
+            (click)="agregarCarrito(producto)" 
+            [disabled]="!formularioValido">
+            Comprar
+          </button>
         </td>
       </tr>
     }@empty {

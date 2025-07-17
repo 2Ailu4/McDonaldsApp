@@ -15,7 +15,7 @@ export class InputInteger {
   @Input() max!: number;
 
   @Output() cantidadChange: EventEmitter<number> = new EventEmitter<number> // el hijo de devuelve la variable modificada para 
-  //que el padre le pueda actualizar el valor (cantidad) = this.cantidadChange.emit(this.cantidad)
+                                                                            //que el padre le pueda actualizar el valor (cantidad) = this.cantidadChange.emit(this.cantidad)
 
   @Output() maxAlcanzado: EventEmitter<string> = new EventEmitter<string>
 
@@ -52,7 +52,7 @@ export class InputInteger {
       return;
     }
 
-    let cantidad = parseInt(valor, 10); // Convertir a número
+    let cantidad = parseInt(valor, 10);
     
     if (cantidad > this.max) {  // Si supera el stock disponible le permito comprar hasta ese valor nomas
       cantidad = this.max;

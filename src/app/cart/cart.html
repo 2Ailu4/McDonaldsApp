@@ -20,7 +20,7 @@
                 <td>{{producto.nombre}}</td>
                 <td>{{producto.cantidad}}</td>
                 <td>{{producto.precio | currency}} c/u</td>
-                <td> <button class="px-0 py-0 btn btn-danger" (click)="removerProducto(producto)"> <span class="">Remover</span> </button> </td>
+                <td> <button class="px-1 py-1 fs-6 btn-lg btn btn-danger" (click)="removerProducto(producto)"> <span class="">Remover</span> </button> </td>
             </tr>
             
         }@empty {
@@ -33,7 +33,7 @@
             <td></td>
             <td class="fs-4 fw-semibold">Total: </td>
             <td>{{((total$ | async) | currency)}}</td>
-            <td><button class="btn btn-warning btn-sm" (click)="confirmarCompra()">Confirmar Compra</button></td>
+            <td><button class="btn btn-warning px-1 py-2 fs-6 text-nowrap" (click)="confirmarCompra()">Confirmar Compra</button></td>
           </tr>
         }
         

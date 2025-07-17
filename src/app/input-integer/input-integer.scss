@@ -1,6 +1,6 @@
 .boton-compra{
   font-size: 10px;
-  background-color: rgb(255, 72, 0);
+  background-color: #ffde6f;
 }
 
 .compra-producto{
@@ -16,3 +16,14 @@ input{
   width: 35px;
 }
 
+.emoji-text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  display: inline-block;
+  transition: all 0.5s ease; 
+
+  &:hover {
+    text-shadow: 3px 3px 8px rgba(215, 136, 18, 0.988); // sombra naranja más grande
+    transform: scale(1.8); 
+    cursor: pointer;
+  }
+}

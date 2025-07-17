@@ -21,7 +21,7 @@ import { SignUp } from './sign-up/sign-up';
     McDonaldsProducts,
     Cart,
     InputInteger,
-    SignUp
+    SignUp,
   ],
   imports: [
     BrowserModule,

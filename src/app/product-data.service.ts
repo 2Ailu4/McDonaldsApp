@@ -28,11 +28,6 @@ export class ProductDataService {
                 producto.forEach(producto => producto.cantidad = 0)));
   }
 
-  // public deleteById(id: string): Observable<any> {
-  //   const deleteURL = `${URL}/${id}`;
-  //   return this.http.delete(deleteURL);
-  // }
-
   public putById(id: number, producto: Producto): Observable<Producto>{
     const putURL = `${URL}/${id}`;
     return this.http.put<Producto>(putURL, producto);
